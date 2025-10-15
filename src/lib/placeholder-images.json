@@ -1,0 +1,40 @@
+{
+  "placeholderImages": [
+    {
+      "id": "fire-incident",
+      "description": "Fire truck at a scene.",
+      "imageUrl": "https://images.unsplash.com/photo-1553227960-74b87364b7ff?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw1fHxmaXJlJTIwdHJ1Y2t8ZW58MHx8fHwxNzU4ODgxNzUzfDA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "fire truck"
+    },
+    {
+      "id": "traffic-jam",
+      "description": "Cars in a traffic jam.",
+      "imageUrl": "https://images.unsplash.com/photo-1717039044041-82399017e236?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwzfHx0cmFmZmljJTIwamFtfGVufDB8fHx8MTc1ODc4ODM1M3ww&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "traffic jam"
+    },
+    {
+      "id": "road-construction",
+      "description": "Road construction site with cones.",
+      "imageUrl": "https://images.unsplash.com/photo-1610477865545-37711c53144d?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw4fHxyb2FkJTIwY29uc3RydWN0aW9ufGVufDB8fHx8MTc1ODg5NTE0N3ww&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "road construction"
+    },
+    {
+      "id": "fallen-tree",
+      "description": "A large tree that has fallen across a road.",
+      "imageUrl": "https://images.unsplash.com/photo-1645466996104-22f4b160331b?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwyfHxmYWxsZW4lMjB0cmVlfGVufDB8fHx8MTc1ODg1NDg0Nnww&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "fallen tree"
+    },
+    {
+      "id": "community-market",
+      "description": "A bustling outdoor community market.",
+      "imageUrl": "https://images.unsplash.com/photo-1716254933464-e89b4e932a68?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw1fHxjb21tdW5pdHklMjBtYXJrZXR8ZW58MHx8fHwxNzU4ODk1MTQ4fDA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "community market"
+    },
+    {
+      "id": "power-outage",
+      "description": "A power line worker on a utility pole.",
+      "imageUrl": "https://images.unsplash.com/photo-1413882353314-73389f63b6fd?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw2fHxwb3dlciUyMGxpbmV8ZW58MHx8fHwxNzU4Nzk3OTA2fDA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "power line"
+    }
+  ]
+}

@@ -1,0 +1,45 @@
+
+rules_version = '2';
+
+service firebase.storage {
+  match /b/{bucket}/o {
+  
+    function isLFPrivileged(uid) {
+      let u = get(/databases/$(database)/documents/users/$(uid)).data;
+      return u.organizationId == 'LOCAL_FOCUS_ORG_ID' && (u.role == 'SuperAdmin' || u.role == 'Admin' || u.role == 'Editor');
+    }
+
+    function isOrgAdmin(uid) {
+      let u = get(/databases/$(database)/documents/users/$(uid)).data;
+      return u.role == 'orgAdmin';
+    }
+
+    // Chat Uploads
+    match /chat-uploads/{chatId}/{fileName} {
+      allow read: if request.auth != null && (
+        request.auth.uid in get(/databases/$(database)/documents/chats/$(chatId)).data.participants ||
+        isLFPrivileged(request.auth.uid)
+      );
+      allow write: if request.auth != null && (
+        isLFPrivileged(request.auth.uid) ||
+        isOrgAdmin(request.auth.uid)
+      );
+    }
+
+    // Announcement Uploads
+    match /announcement-uploads/{announcementId}/{fileName} {
+      // Allow public read as the parent document's rules will gatekeep access
+      allow read: if true; 
+      allow write: if request.auth != null && (
+        isLFPrivileged(request.auth.uid) ||
+        isOrgAdmin(request.auth.uid)
+      );
+    }
+    
+    // Profile Pictures (example)
+    match /user-avatars/{userId}/{fileName} {
+        allow read: if true;
+        allow write: if request.auth != null && request.auth.uid == userId;
+    }
+  }
+}

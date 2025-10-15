@@ -1,0 +1,8 @@
+
+import IncidentDetailPageClient from './client';
+
+// This is a server component that handles the params
+export default function IncidentDetailPage({ params }: { params: { id: string } }) {
+  // We pass the id down to the client component
+  return <IncidentDetailPageClient id={params.id} />;
+}

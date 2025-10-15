@@ -1,0 +1,84 @@
+
+rules_version = '2';
+
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    // Helper functions
+    function isSuperAdmin() {
+      return request.auth.token.email == "basil.khoury14@gmail.com";
+    }
+
+    function isLocalFocusAdmin() {
+      return request.auth.token.role == "Admin" && request.auth.token.organizationId == "LOCAL_FOCUS_ORG_ID";
+    }
+
+    function isOrgAdmin(orgId) {
+      return request.auth.token.orgId == orgId && request.auth.token.role == "orgAdmin";
+    }
+
+    // Organizations
+    match /organizations/{orgId} {
+      allow read: if request.auth != null;
+      allow create, update: if isSuperAdmin() || isLocalFocusAdmin();
+      allow delete: if isSuperAdmin();
+
+      // Quotes Subcollection
+      match /quotes/{quoteId} {
+        allow read: if isSuperAdmin() || isLocalFocusAdmin() || isOrgAdmin(orgId);
+        allow create: if request.auth != null;
+        allow update: if isSuperAdmin() || isLocalFocusAdmin() || isOrgAdmin(orgId);
+        allow delete: if isSuperAdmin() || isLocalFocusAdmin() || isOrgAdmin(orgId);
+      }
+    }
+
+    // Users
+    match /users/{uid} {
+      allow read: if request.auth != null;
+      allow write: if isSuperAdmin() || isLocalFocusAdmin() || request.auth.uid == uid;
+    }
+    
+    // Categories
+    match /categories/{categoryId} {
+      allow read: if request.auth != null;
+      allow write: if isSuperAdmin() || isLocalFocusAdmin();
+
+      match /subcategories/{subId} {
+        allow read: if request.auth != null;
+        allow write: if isSuperAdmin() || isLocalFocusAdmin();
+      }
+    }
+
+    // Incidents
+    match /incidents/{incidentId} {
+      allow read: if request.auth != null;
+      allow create: if request.auth != null;
+      allow update: if isSuperAdmin() || isLocalFocusAdmin() || request.auth.uid == resource.data.createdBy;
+      allow delete: if isSuperAdmin() || isLocalFocusAdmin();
+    }
+    
+    // Organization users subcollection
+    match /organizations/{orgId}/users/{userId} {
+      allow read: if request.auth != null;
+      allow write: if isSuperAdmin() || isLocalFocusAdmin() || isOrgAdmin(orgId);
+    }
+
+    // Logs collection
+    match /logs/{logId} {
+      allow read: if isSuperAdmin() || isLocalFocusAdmin();
+      allow write: if isSuperAdmin() || isLocalFocusAdmin();
+    }
+
+    // Reports, Chats, etc.
+    match /{path=**} {
+      allow read, write: if isSuperAdmin() || isLocalFocusAdmin();
+    }
+
+    // Default deny
+    match /{document=**} {
+      allow read, write: if false;
+    }
+  }
+}
+
+    
